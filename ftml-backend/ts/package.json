@@ -1,0 +1,36 @@
+{
+  "name": "@flexiformal/ftml-backend",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/FlexiFormal/ftml-ts#readme",
+  "bugs": {
+    "url": "https://github.com/FlexiFormal/ftml-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlexiFormal/ftml-ts.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "Dennis Müller",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src/ftml/*",
+    "src/index.ts"
+  ],
+  "scripts": {
+    "build-rs": "cd ../rs && cargo make",
+    "build-ts": "tsup",
+    "build": "npm run build-rs && npm run build-ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsup": "^8.4.0"
+  }
+}

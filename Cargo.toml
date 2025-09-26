@@ -1,0 +1,55 @@
+[workspace]
+members = [
+    "ftml-ts/rs",
+    "ftml-backend/rs"
+]
+resolver = "3"
+
+[profile.release]
+panic = 'abort'
+opt-level = 'z'
+lto = true
+overflow-checks = false
+strip = true
+
+[profile.dev]
+strip = "none"
+opt-level = 2
+debug = true
+split-debuginfo = "off"
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'unwind'
+incremental = true
+#codegen-units = 256
+rpath = false
+
+[workspace.lints.clippy]
+enum_glob_use = "deny"
+pedantic = "deny"
+nursery = "deny"
+unwrap_used = "deny"
+
+[workspace.dependencies]
+ftml-viewer = { git = "https://github.com/FlexiFormal/FTML" } # { path="../FTML/viewer" } #
+ftml-backend = { git = "https://github.com/FlexiFormal/FTML", features=["typescript"] } # { path="../FTML/backend",features=["typescript"] } #
+ftml-uris = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/uris" } #
+ftml-ontology = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/ontology" } #
+ftml-dom = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] } #{ path="../FTML/dom", features=["csr","typescript"]} #
+ftml-components = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript","callbacks"] } #{ path="../FTML/components", features=["csr","typescript","callbacks"]} #
+ftml-js-utils = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/js-utils" } #
+leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] } #{ path="../FTML/leptos-react", features=["csr","typescript"]} #
+
+leptos-posthoc = { git = "https://github.com/FlexiFormal/leptos-posthoc.git", features=["csr"] }
+
+flams-backend-types = { git = "https://github.com/FlexiFormal/FLAMS.git", branch="refactor", features=["typescript"] } # { path="../../sTeX/FLAMS/backend-types", features=["typescript"]} #
+
+wasm-bindgen = "0.2"
+leptos = { version = "0.8",features=["csr"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+console_error_panic_hook = "0.1"
+tracing-wasm = { version = "0.2" }
+tsify = { version = "0.5", features = ["js"] }
+serde = { version = "1" }

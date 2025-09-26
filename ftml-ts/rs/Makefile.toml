@@ -1,0 +1,35 @@
+[tasks.build]
+install_crate = "wasm-pack"
+command = "wasm-pack"
+toolchain = "nightly"
+args = [
+    "build",
+    "--out-dir",
+    "../ts/src/ftml",
+    "--out-name",
+    "ftml",
+    "--target",
+    "web",
+    "--",
+    "--target",
+    "wasm32-unknown-unknown",
+    "-Z",
+    "build-std=std,panic_abort,core,alloc",
+    "-Z",
+    "build-std-features=optimize_for_size", #,panic_immediate_abort",
+    "--timings"
+]
+
+[tasks.patch-js]
+script_runner = "@shell"
+script = '''
+./patch.sh -i ../ts/src/ftml/ftml_bg.wasm -js ../ts/src/ftml/ftml.js -o ../ts/src/ftml/ftml.js
+rm ../ts/src/ftml/.gitignore
+rm ../ts/src/ftml/ftml_bg.wasm
+rm ../ts/src/ftml/ftml_bg.wasm.d.ts
+rm ../ts/src/ftml/package.json
+'''
+
+[tasks.default]
+clear = true
+dependencies = ["build", "patch-js"]

@@ -1,0 +1,29 @@
+[package]
+name = "ftml-ts"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib","rlib"]
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-O", "--all-features"]
+
+[features]
+
+[dependencies]
+ftml-viewer = {workspace = true,features = ["typescript"]}
+ftml-uris = { workspace=true }
+ftml-ontology = { workspace=true }
+ftml-dom = { workspace=true }
+ftml-components = { workspace=true }
+leptos-posthoc = { workspace = true}
+leptos-react = { workspace = true}
+wasm-bindgen = {workspace = true}
+leptos = {workspace = true}
+tracing = {workspace = true}
+tracing-subscriber = {workspace = true}
+console_error_panic_hook = {workspace = true}
+tracing-wasm = {workspace = true}
+tsify = {workspace = true}
+serde = {workspace = true}
