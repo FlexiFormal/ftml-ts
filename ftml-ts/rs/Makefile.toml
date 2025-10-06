@@ -23,11 +23,13 @@ args = [
 [tasks.patch-js]
 script_runner = "@shell"
 script = '''
-./patch.sh -i ../ts/src/ftml/ftml_bg.wasm -js ../ts/src/ftml/ftml.js -o ../ts/src/ftml/ftml.js
+./patch.sh -i ../ts/src/ftml/ftml_bg.wasm -js ../ts/src/ftml/ftml.js -o ../ts/src/ftml/ftml2.js
 rm ../ts/src/ftml/.gitignore
 rm ../ts/src/ftml/ftml_bg.wasm
 rm ../ts/src/ftml/ftml_bg.wasm.d.ts
 rm ../ts/src/ftml/package.json
+rm ../ts/src/ftml/ftml.js
+mv ../ts/src/ftml/ftml2.js ../ts/src/ftml/ftml.js
 '''
 
 [tasks.default]

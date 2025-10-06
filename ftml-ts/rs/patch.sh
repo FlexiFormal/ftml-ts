@@ -68,24 +68,27 @@ async function init() {
   return __wbg_finalize_init(instance, module);
 }
 
-const initAsync = __wbg_init;
+//const initAsync = __wbg_init;
 
-export {initAsync, initSync, init};
+export {/*initAsync, initSync,*/ init};
 EOF
 );
 
 js_contents_patched="${js_contents}";
-js_contents_patched=$(echo "$js_contents_patched" | sed "s|export { initSync };||");
-js_contents_patched=$(echo "$js_contents_patched" | sed "s|export default __wbg_init;||");
+js_contents_patched=$(echo "${js_contents_patched}" | sed "s|module_or_path = new URL('ftml_bg\.wasm', import\.meta\.url);||");
+js_contents_patched=$(echo "${js_contents_patched}" | sed "s|export { initSync };||");
+js_contents_patched=$(echo "${js_contents_patched}" | sed "s|export default __wbg_init;||");
 js_contents_patched="${js_contents_patched}${patch}";
+
+#echo "${js_contents_patched}" >> "${output_file}"
 
 echo "${js_contents_patched}" | \
 esbuild \
   --bundle \
   --minify \
+  --outfile="${output_file}" \
   --format=esm \
   --target=es2020 \
   --platform=browser \
   --tree-shaking=true \
-  --analyze \
-  --outfile="${output_file}";
+  --analyze;

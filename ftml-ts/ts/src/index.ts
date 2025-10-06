@@ -18,7 +18,7 @@ export async function initialize(
     await FTML.init();
     FTML.initialize(backendUrl, logLevel);
     if (backendUrl) {
-        if (window !== undefined) {
+        if (typeof window !== 'undefined') {
             window.FTML_SERVER_URL = backendUrl;
         }
         if (globalThis !== undefined) globalThis.FTML_SERVER_URL = backendUrl;

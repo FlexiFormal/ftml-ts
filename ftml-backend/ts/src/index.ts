@@ -35,7 +35,7 @@ declare global {
 }
 
 function getUrl(): string {
-    if (window !== undefined) {
+    if (typeof window !== 'undefined') {
         if (window.FTML_SERVER_URL) {
             return window.FTML_SERVER_URL;
         }
