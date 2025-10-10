@@ -12,7 +12,7 @@ export default {
     title: "Full Test",
 };
 
-await initialize("http://localhost:3000", "DEBUG");
+await initialize("https://mmt.beta.vollki.kwarc.info", "DEBUG");
 
 export const Complete = () => {
     //console.log("Server URL according to leptos:", getServerUrl());

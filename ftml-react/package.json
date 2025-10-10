@@ -1,6 +1,6 @@
 {
   "name": "@flexiformal/ftml-react",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "homepage": "https://github.com/FlexiFormal/ftml-ts#readme",
   "bugs": {
@@ -50,7 +50,7 @@
     "vitest": "^3.0.7"
   },
   "dependencies": {
-    "@flexiformal/ftml": "=0.0.5",
+    "@flexiformal/ftml": "=0.0.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }

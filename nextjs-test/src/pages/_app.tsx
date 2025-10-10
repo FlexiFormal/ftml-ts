@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import { initialize } from "@flexiformal/ftml-react";
 import type { AppProps } from "next/app";
-import { useState } from "react";
+import { createContext, useState } from "react";
 
 let flamsInitialized = false;
 const initStartTime = Date.now();
@@ -19,6 +19,11 @@ initialize(FLAMS_URL, "WARN")
     );
   });
 
+
+export const ReadyToRender = createContext<boolean>(
+    false
+);
+
 export default function App({ Component, pageProps }: AppProps) {
   const [readyToRender, setReadyToRender] = useState(false);
   const interval = setInterval(() => {
@@ -27,5 +32,5 @@ export default function App({ Component, pageProps }: AppProps) {
       clearInterval(interval);
     }
   }, 10);
-  return <Component {...pageProps} />;
+  return <ReadyToRender.Provider value={readyToRender}><Component {...pageProps} /></ReadyToRender.Provider>;
 }

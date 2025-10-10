@@ -151,7 +151,7 @@ export interface FTMLFragmentArgs extends FtmlConfig {
  * render an FTML fragment
  */
 export const FTMLFragment: React.FC<FTMLFragmentArgs> = (args) => {
-    const mountRef = useRef<HTMLDivElement>(null);
+    const mountRef = useRef<HTMLDivElement | null>(null);
     const { addTunnel, TunnelRenderer } = useLeptosTunnels();
     const context = useContext(ReactLeptosContext);
 
