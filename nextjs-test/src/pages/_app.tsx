@@ -8,7 +8,7 @@ const initStartTime = Date.now();
 const FLAMS_URL =
   process.env.NEXT_PUBLIC_FLAMS_URL ?? "https://mmt.beta.vollki.kwarc.info"; // "https://mathhub.info"
 // this code runs earlier if its not in the useEffect
-initialize(FLAMS_URL, "WARN")
+initialize(FLAMS_URL, "TRACE")
   .then(() => {
     console.log("FTML initialized: ", Date.now() - initStartTime, "ms");
     flamsInitialized = true;
