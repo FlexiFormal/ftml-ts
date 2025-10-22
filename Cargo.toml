@@ -6,11 +6,15 @@ members = [
 resolver = "3"
 
 [profile.release]
-panic = 'abort'
+panic = "abort"
+# debug = "full"
+codegen-units = 1
+overflow-checks = false
+split-debuginfo = "packed"
+strip = "symbols"
 opt-level = 'z'
 lto = true
-overflow-checks = false
-strip = true
+incremental = true
 
 [profile.dev]
 strip = "none"

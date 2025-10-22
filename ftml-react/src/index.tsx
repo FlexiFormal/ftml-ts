@@ -157,6 +157,7 @@ export const FTMLFragment: React.FC<FTMLFragmentArgs> = (args) => {
 
     useEffect(() => {
         if (!mountRef.current) return;
+        //console.log("Mounting fragment ",args.fragment.uri);
         const handle = Base.ftmlFragment(
             mountRef.current,
             args.fragment,
@@ -164,6 +165,7 @@ export const FTMLFragment: React.FC<FTMLFragmentArgs> = (args) => {
             toConfig(args, addTunnel),
         );
         return () => {
+            //console.log("Unmounting fragment ",args.fragment.uri);
             handle.unmount();
         };
     }, []);
