@@ -1,4 +1,4 @@
-import { FTML } from "@flexiformal/ftml";
+import { FTML, injectCss } from "@flexiformal/ftml";
 import { FTMLFragment } from "@flexiformal/ftml-react";
 import { useEffect, useState } from "react";
 
@@ -51,7 +51,10 @@ const OnFragmentPage = () => {
     console.log("fetching quiz");
     fetch("/api/get-quiz")
       .then((response) => response.json())
-      .then((data) => setQuiz(data))
+      .then((data: FTML.Quiz) => {
+        setQuiz(data);
+        injectCss(data?.css ?? []);
+      })
       .catch((error) => console.error("Error:", error));
   }, []);
 
