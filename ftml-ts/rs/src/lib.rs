@@ -11,7 +11,15 @@ const INIT: &str = "export function init(): Promise<void>;";
 
 #[wasm_bindgen::prelude::wasm_bindgen]
 pub fn inject_css(css: Vec<Css>) {
-    for c in css {
+    for mut c in css {
+        if let Css::Link(lnk) = &mut c && 
+        let Some(r) = lnk.strip_prefix("srv:") {
+            *lnk = format!(
+                    "{}{r}",
+                    ftml_viewer::backend::BackendUrlRef
+                )
+                .into_boxed_str();
+        }
         c.inject();
     }
 }
