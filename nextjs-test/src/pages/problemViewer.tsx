@@ -15,7 +15,7 @@ function getProblemState(
     ? sol?.check_response(current_response)
     : sol?.default_feedback();
   if (!feedback) return { type: "Finished", current_response }; // Something went wrong!!
-  return { type: "Graded", feedback: feedback };
+  return { type: "Graded", feedback: feedback.to_json() };
 }
 
 function UriProblemViewer({ uri }: { uri: string }) {

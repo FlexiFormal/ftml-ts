@@ -40,7 +40,7 @@ export function getProblemState(
     ? sol?.check_response(current_response)
     : sol?.default_feedback();
   if (!feedback) return { type: "Finished", current_response }; // Backup: if something goes wrong.
-  return { type: "Graded", feedback: feedback };
+  return { type: "Graded", feedback: feedback.to_json() };
 }
 
 const getProblemsStates = (

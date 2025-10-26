@@ -15,8 +15,8 @@ function getProblemState(
   const feedback = current_response
     ? sol?.check_response(current_response)
     : sol?.default_feedback();
-  if (!feedback) return { type: "Finished", current_response }; // Something went wrong!!
-  return { type: "Graded", feedback: feedback };
+  if (!feedback) return { type: "Finished", current_response:current_response }; // Something went wrong!!
+  return { type: "Graded", feedback: feedback.to_json() };
 }
 
 const OnFragmentPage = () => {

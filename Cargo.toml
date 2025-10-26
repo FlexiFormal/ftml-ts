@@ -45,6 +45,15 @@ ftml-components = { git = "https://github.com/FlexiFormal/FTML", features=["csr"
 ftml-js-utils = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/js-utils" } #
 leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] } #{ path="../FTML/leptos-react", features=["csr","typescript"]} #
 
+#ftml-viewer = { path="../FTML/viewer" } #
+#ftml-backend = { path="../FTML/backend",features=["typescript"] } #
+#ftml-uris = { path="../FTML/uris" } #
+#ftml-ontology = { path="../FTML/ontology" } #
+#ftml-dom = { path="../FTML/dom", features=["csr","typescript"]} #
+#ftml-components = { path="../FTML/components", features=["csr","typescript","callbacks"]} #
+#ftml-js-utils = { path="../FTML/js-utils" } #
+#leptos-react = { path="../FTML/leptos-react", features=["csr","typescript"]} #
+
 leptos-posthoc = { git = "https://github.com/FlexiFormal/leptos-posthoc.git", features=["csr"] }
 
 flams-backend-types = { git = "https://github.com/FlexiFormal/FLAMS.git", branch="refactor", features=["typescript"] } # { path="../../sTeX/FLAMS/backend-types", features=["typescript"]} #

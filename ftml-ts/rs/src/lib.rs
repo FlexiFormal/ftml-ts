@@ -38,11 +38,12 @@ pub fn initialize(url: Option<String>, log_level: Option<LogLevel>) {
         let lvl: tracing::Level = lvl.into();
         tracing_subscriber::filter::Targets::new()
             .with_target("ftml_dom", lvl)
-            .with_target("ftml_leptos", lvl)
-            .with_target("ftml_core", lvl)
+            .with_target("ftml_components", lvl)
+            .with_target("ftml_parser", lvl)
             .with_target("ftml_backend", lvl)
             .with_target("ftml_ts", lvl)
             .with_target("ssr_example", lvl)
+            .with_target("ftml_js_utils",lvl)
             .with_target(
                 "leptos_posthoc",
                 tracing_subscriber::filter::LevelFilter::ERROR,
