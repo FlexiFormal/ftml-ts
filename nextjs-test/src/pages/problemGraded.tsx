@@ -43,10 +43,13 @@ const OnFragmentPage = () => {
     : ftmlSolution.default_feedback();
   if (!feedback) return <div>Error: Invalid feedback</div>;
   const feedbackjs = feedback.to_json();
-  console.log("ftmlSolution", {ftmlSolution});
-  console.log("feedback", {feedbackjs});
+  console.log("ftmlSolution", { ftmlSolution });
+  console.log("feedback", { feedbackjs });
 
-  const problemState = { type: "Graded", feedback:feedbackjs } as FTML.ProblemState;
+  const problemState = {
+    type: "Graded",
+    feedback: feedbackjs,
+  } as FTML.ProblemState;
   const problemStates = new Map([[problem.uri, problemState]]);
 
   return (
