@@ -2,6 +2,7 @@ use crate::{Views, inject_css};
 use ftml_components::{SidebarPosition, config::FtmlConfig, utils::LocalCacheExt};
 use ftml_dom::FtmlViews;
 use ftml_uris::{DocumentElementUri, DocumentUri};
+use leptos::prelude::IntoAny;
 use leptos_react::{
     context::LeptosContext,
     functions::{FromJs, JsFunction2},
@@ -96,28 +97,26 @@ pub fn render_document(
                             ftml_viewer::backend::GlobalBackend,
                             _,
                             _,
-                            _,
-                            _,
                         >(
                             move |c| c.get_document_html(uricl, None),
                             |(html, css, stripped)| {
                                 inject_css(css.into_vec());
-                                Views::setup_document(
+                                Views::setup_document::<ftml_viewer::backend::GlobalBackend>(
                                     uri,
                                     SidebarPosition::Next,
                                     stripped,
-                                    move || Views::render_ftml(html.into_string(), None),
+                                    move || Views::render_ftml(html.into_string(), None).into_any(),
                                 )
                             },
-                            || "error",
+                            || "error".into_any(),
                         ),
                     )
                 }
-                Some(s) => leptos::either::Either::Right(Views::setup_document(
+                Some(s) => leptos::either::Either::Right(Views::setup_document::<ftml_viewer::backend::GlobalBackend>(
                     uri,
                     SidebarPosition::Next,
                     true,
-                    move || Views::render_ftml(s.into_string(), None),
+                    move || Views::render_ftml(s.into_string(), None).into_any(),
                 )),
             }
         })
@@ -146,29 +145,27 @@ pub fn render_fragment(
                         ftml_viewer::backend::GlobalBackend,
                         _,
                         _,
-                        _,
-                        _,
                     >(
                         move |c| c.get_fragment(uricl.into(), None),
                         |(html, css, stripped)| {
                             inject_css(css.into_vec());
-                            Views::render_fragment(
+                            Views::render_fragment::<ftml_viewer::backend::GlobalBackend>(
                                 Some(uri.into()),
                                 SidebarPosition::None,
                                 stripped,
-                                move || Views::render_ftml(html.into_string(), None),
+                                move || Views::render_ftml(html.into_string(), None).into_any(),
                             )
                         },
-                        || "error",
+                        || "error".into_any(),
                     ),
                 )
             }
             FragmentOptions::HtmlString { html, uri } => {
-                leptos::either::Either::Right(Views::render_fragment(
+                leptos::either::Either::Right(Views::render_fragment::<ftml_viewer::backend::GlobalBackend>(
                     uri.map(Into::into),
                     SidebarPosition::None,
                     true,
-                    move || Views::render_ftml(html.into_string(), None),
+                    move || Views::render_ftml(html.into_string(), None).into_any(),
                 ))
             }
         })
@@ -196,7 +193,7 @@ fn do_config(config: wasm_bindgen::JsValue) {
         FtmlConfig::default()
     } else {
         match FtmlConfig::from_js(config) {
-            Ok(c) => c,
+            Ok(c) => {tracing::warn!("Config:{c:?}");c},
             Err(e) => {
                 for e in e.errors {
                     tracing::error!("{e}");

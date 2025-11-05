@@ -57,8 +57,6 @@ async function init() {
 
   const imports = __wbg_get_imports();
 
-  __wbg_init_memory(imports);
-
   const buffer = await decode('$file_contents_b64');
 
   const module = new WebAssembly.Module(buffer);
@@ -80,7 +78,7 @@ js_contents_patched=$(echo "${js_contents_patched}" | sed "s|export { initSync }
 js_contents_patched=$(echo "${js_contents_patched}" | sed "s|export default __wbg_init;||");
 js_contents_patched="${js_contents_patched}${patch}";
 
-#echo "${js_contents_patched}" >> "${output_file}"
+# echo "${js_contents_patched}" >> "${output_file}"
 
 echo "${js_contents_patched}" | \
 esbuild \

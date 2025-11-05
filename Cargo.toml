@@ -36,14 +36,14 @@ nursery = "deny"
 unwrap_used = "deny"
 
 [workspace.dependencies]
-ftml-viewer = { git = "https://github.com/FlexiFormal/FTML" } # { path="../FTML/viewer" } #
-ftml-backend = { git = "https://github.com/FlexiFormal/FTML", features=["typescript"] } # { path="../FTML/backend",features=["typescript"] } #
-ftml-uris = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/uris" } #
-ftml-ontology = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/ontology" } #
-ftml-dom = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] } #{ path="../FTML/dom", features=["csr","typescript"]} #
-ftml-components = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript","callbacks"] } #{ path="../FTML/components", features=["csr","typescript","callbacks"]} #
-ftml-js-utils = { git = "https://github.com/FlexiFormal/FTML" } #{ path="../FTML/js-utils" } #
-leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] } #{ path="../FTML/leptos-react", features=["csr","typescript"]} #
+ftml-viewer = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
+ftml-backend = { git = "https://github.com/FlexiFormal/FTML", features=["typescript"], branch="counters" }
+ftml-uris = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
+ftml-ontology = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
+ftml-dom = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"], branch="counters" }
+ftml-components = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript","callbacks"], branch="counters" }
+ftml-js-utils = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
+leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"], branch="counters" }
 
 #ftml-viewer = { path="../FTML/viewer" } #
 #ftml-backend = { path="../FTML/backend",features=["typescript"] } #

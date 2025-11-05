@@ -2,7 +2,7 @@ import { FTMLDocument } from "@flexiformal/ftml-react";
 
 function CoverageHighlight() {
   const notesUri =
-    "https://mathhub.info?a=courses/FAU/AI/course&p=course/notes&d=notes1&l=en";
+    "http://mathhub.info?a=courses/FAU/AI/course&p=course/notes&d=notes1&l=en";
   return (
     <div>
       <h1>Notes</h1>

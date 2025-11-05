@@ -12,14 +12,40 @@ export default {
     title: "Full Test",
 };
 
-await initialize("https://mmt.beta.vollki.kwarc.info", "DEBUG");
+await initialize("https://mathhub.info", "WARN");
+
+const progress = [
+          {
+            uri: "http://mathhub.info?a=courses/FAU/AI/course&p=course/sec&d=getting-most&l=en&e=section",
+            timestamp: 1760451300000,
+          },
+          {
+            uri: "http://mathhub.info?a=courses/FAU/AI/course&p=intro/sec&d=whatisai&l=en&e=section",
+            timestamp: 1760611782175,
+          },
+          {
+            uri: "http://mathhub.info?a=courses/FAU/AI/course&p=intro/sec&d=agi&l=en&e=section",
+            timestamp: 1761056100000,
+          },
+          {
+            uri: "http://mathhub.info?a=courses/FAU/AI/course&p=prolog/sec&d=intro&l=en&e=section",
+            timestamp: 1761664500000,
+          },
+          {
+            uri: "http://mathhub.info?a=courses/FAU/AI/course&p=prolog/sec&d=prolog-features&l=en&e=section",
+            timestamp: 1761808500000,
+          },
+          {
+            uri: "http://mathhub.info?a=courses/FAU/AI/course&p=rational-agents/sec&d=rationality&l=en&e=section",
+            timestamp: 1762269300000,
+          },
+        ];
 
 export const Complete = () => {
     //console.log("Server URL according to leptos:", getServerUrl());
     const doc = {
         type: "FromBackend",
-        uri: "http://mathhub.info?a=sTeX/MathTutorial&d=textbook&l=en",
-        toc: "GET",
+        uri: "http://mathhub.info?a=courses/FAU/AI/course&p=course/notes&d=notes1&l=en",//"http://mathhub.info?a=sTeX/MathTutorial&d=textbook&l=en",
     } as Base.FTML.DocumentOptions;
     const frag1 = {
         type: "FromBackend",
@@ -67,6 +93,8 @@ export const Complete = () => {
                         onSectionTitle={(uri, _lvl) => (
                             <SectionTitle sec={uri} />
                         )}
+                        toc={"Get"}
+                        tocProgress={progress}
                         sectionWrap={(uri, lvl) => {
                             if (lvl.type === "Section") {
                                 return (ch) => (
