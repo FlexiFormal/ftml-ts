@@ -1,4 +1,4 @@
-import { FTMLDocument, FTMLSetup } from "@flexiformal/ftml-react";
+import { FTMLDocument } from "@flexiformal/ftml-react";
 
   
 function Notes() {
@@ -9,6 +9,7 @@ function Notes() {
           <FTMLDocument
             key={notesUri}
             document={{ type: 'FromBackend', uri: notesUri }}
+            toc="Get"
           />
     </div>
   );
