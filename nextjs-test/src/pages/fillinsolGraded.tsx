@@ -4,7 +4,7 @@ import { FTMLFragment } from "@flexiformal/ftml-react";
 import { useEffect, useState } from "react";
 
 const OnFragmentPage = () => {
-  const problemIdx = 0;
+  const problemIdx = 1;
   const [problem, setProblem] = useState<QuizProblem | undefined>(undefined);
   const [solution, setSolution] = useState<string | undefined>(undefined);
   const [response, setResponse] = useState<FTML.ProblemResponse | undefined>(
@@ -26,8 +26,21 @@ const OnFragmentPage = () => {
         uri: problem.uri,
         responses: [
           {
-            type: "MultipleChoice",
-            value: [true, true, false, true, true, false],
+            type: "Fillinsol",
+            value: "reflexive",
+          },
+          {
+            type: "Fillinsol",
+            value: "symmetric",
+          },
+          {
+            type: "Fillinsol",
+            value: "transitiv",
+            // Entire problem stops being graded and response goes missing when anything is incorrect
+          },
+          {
+            type: "Fillinsol",
+            value: "equivalence",
           },
         ],
       });
