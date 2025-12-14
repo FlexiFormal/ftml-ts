@@ -71,10 +71,10 @@ const OnFragmentPage = () => {
       <pre>{JSON.stringify(problem, null, 2)}</pre>
       <br />
       FTML Solution:
-      <pre>{JSON.stringify(ftmlSolution, null, 2)}</pre>
+      <pre>{JSON.stringify(ftmlSolution.to_solutions(),null,2)}</pre>
       <br />
       Feedback:
-      <pre>{JSON.stringify(feedback, null, 2)}</pre>
+      <pre>{JSON.stringify(feedback.to_json(), null, 2)}</pre>
       <br />
       Problem States:
       <pre>{JSON.stringify(Object.fromEntries(problemStates), null, 2)}</pre>

@@ -54,3 +54,5 @@ export function ftmlFragment(
 ): FTML.LeptosMountHandle {
     return FTML.render_fragment(to, context, config, fragment);
 }
+
+export const rdfEncodeUri = FTML.rdf_encode;

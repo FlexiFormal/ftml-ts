@@ -43,6 +43,7 @@ export interface FtmlConfig {
     problemWrap?: (
         uri: Base.FTML.DocumentElementUri,
         subProblem: boolean,
+        autogradable:boolean
     ) => ((ch: ReactNode) => ReactNode) | undefined;
     onSectionTitle?: (
         uri: Base.FTML.DocumentElementUri,

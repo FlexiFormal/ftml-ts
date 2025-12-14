@@ -80,9 +80,9 @@ export function toConfig(
     }
     const problem = config.problemWrap;
     if (problem) {
-        cfg.problemWrap = (u, sub) => {
+        cfg.problemWrap = (u, sub,auto) => {
             return (e, ctx) => {
-                const r = problem(u, sub);
+                const r = problem(u, sub,auto);
                 if (r) {
                     addTunnel(e, r(elemToReact(e, ctx)), ctx);
                 }

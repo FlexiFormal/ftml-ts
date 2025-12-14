@@ -7,7 +7,6 @@ export {
     Uri,
     Institution,
     ArchiveIndex,
-    QueryFilter,
     SearchResult,
     SearchResultKind,
     ArchiveGroupData,
@@ -84,12 +83,14 @@ export async function index(): Promise<
  */
 export async function searchDocs(
     query: string,
-    filter: Base.QueryFilter,
+    inDocuments:Base.DocumentUri[],
     numResults: number,
 ): Promise<[number, Base.SearchResult][] | undefined> {
     return await rawPostRequest("api/search", {
         query: query,
-        opts: filter,
+        opts: {
+            in_documents:inDocuments
+        },
         num_results: numResults,
     });
 }

@@ -36,14 +36,14 @@ nursery = "deny"
 unwrap_used = "deny"
 
 [workspace.dependencies]
-ftml-viewer = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
-ftml-backend = { git = "https://github.com/FlexiFormal/FTML", features=["typescript"], branch="counters" }
-ftml-uris = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
-ftml-ontology = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
-ftml-dom = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"], branch="counters" }
-ftml-components = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript","callbacks"], branch="counters" }
-ftml-js-utils = { git = "https://github.com/FlexiFormal/FTML", branch="counters" }
-leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"], branch="counters" }
+ftml-viewer = { git = "https://github.com/FlexiFormal/FTML" }
+ftml-backend = { git = "https://github.com/FlexiFormal/FTML", features=["typescript"] }
+ftml-uris = { git = "https://github.com/FlexiFormal/FTML" }
+ftml-ontology = { git = "https://github.com/FlexiFormal/FTML" }
+ftml-dom = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] }
+ftml-components = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript","callbacks"] }
+ftml-js-utils = { git = "https://github.com/FlexiFormal/FTML" }
+leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","typescript"] }
 
 #ftml-viewer = { path="../FTML/viewer" } #
 #ftml-backend = { path="../FTML/backend",features=["typescript"] } #
@@ -56,7 +56,7 @@ leptos-react = { git = "https://github.com/FlexiFormal/FTML", features=["csr","t
 
 leptos-posthoc = { git = "https://github.com/FlexiFormal/leptos-posthoc.git", features=["csr"] }
 
-flams-backend-types = { git = "https://github.com/FlexiFormal/FLAMS.git", branch="refactor", features=["typescript"] } # { path="../../sTeX/FLAMS/backend-types", features=["typescript"]} #
+flams-backend-types = { git = "https://github.com/FlexiFormal/FLAMS.git", features=["typescript"] } # { path="../../sTeX/FLAMS/backend-types", features=["typescript"]} #
 
 wasm-bindgen = "0.2"
 leptos = { version = "0.8",features=["csr"] }

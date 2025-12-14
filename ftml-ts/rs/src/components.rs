@@ -193,7 +193,7 @@ fn do_config(config: wasm_bindgen::JsValue) {
         FtmlConfig::default()
     } else {
         match FtmlConfig::from_js(config) {
-            Ok(c) => {tracing::warn!("Config:{c:?}");c},
+            Ok(c) => c,//{tracing::warn!("Config:{c:?}");c},
             Err(e) => {
                 for e in e.errors {
                     tracing::error!("{e}");
