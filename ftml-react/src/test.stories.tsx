@@ -12,7 +12,7 @@ export default {
     title: "Full Test",
 };
 
-await initialize("https://mathhub.info", "WARN");
+await initialize("https://mmt.beta.vollki.kwarc.info", "WARN");
 
 const progress = [
           {

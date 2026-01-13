@@ -83,15 +83,33 @@ export interface FileData {
     format: string;
 }
 
+export interface TermContainer {
+    parsed: Term | undefined;
+    checked?: Term | undefined;
+    source?: SourceRange;
+}
+
 /**
  * Either a variable or a symbol reference
  */
 export type VarOrSym = { Sym: SymbolUri } | { Var: Variable };
 
+export interface SourcePos {
+    line: number;
+    col: number;
+}
+
+export interface SourceRange {
+    start: SourcePos;
+    end: SourcePos;
+}
+
 /**
  * Wrapper for [`OrderedFloat`] for serialization reasons
  */
 export type Float = number;
+
+export type Permutation = number[];
 
 export interface DocumentRange {
     start: number;
@@ -117,7 +135,9 @@ export interface DataRef {
  * FTML expressions are foundation-independent, but more expressive by hardcoding
  * [Theories-as-Types]()-like record \"types\".
  */
-export type Term = { Symbol: { uri: SymbolUri; presentation: VarOrSym | undefined } } | { Var: { variable: Variable; presentation: VarOrSym | undefined } } | { Application: ApplicationTerm } | { Bound: BindingTerm } | { Field: RecordFieldTerm } | { Label: { name: UriName; df?: Term | undefined; tp?: Term | undefined } } | { Opaque: OpaqueTerm };
+export type Term = { Symbol: { uri: SymbolUri; presentation: VarOrSym | undefined } } | { Var: { variable: Variable; presentation: VarOrSym | undefined } } | { Application: ApplicationTerm } | { Bound: BindingTerm } | { Field: RecordFieldTerm } | { Label: { name: UriName; df?: Term | undefined; tp?: Term | undefined } } | { Opaque: OpaqueTerm } | { Number: Numeric };
+
+export type Numeric = { Int: number } | { Float: Float };
 
 export type ApplicationTerm = Application;
 
@@ -164,7 +184,13 @@ export interface OpaqueNode {
 
 export type Argument = { Simple: Term } | { Sequence: MaybeSequence<Term> };
 
-export type BoundArgument = { Simple: Term } | { Sequence: MaybeSequence<Term> } | { Bound: Variable } | { BoundSeq: MaybeSequence<Variable> };
+export type BoundArgument = { Simple: Term } | { Sequence: MaybeSequence<Term> } | { Bound: ComponentVar } | { BoundSeq: MaybeSequence<ComponentVar> };
+
+export interface ComponentVar {
+    var: Variable;
+    tp: Term | undefined;
+    df: Term | undefined;
+}
 
 export type MaybeSequence<T> = { One: T } | { Seq: T[] };
 
@@ -178,29 +204,31 @@ export type Timestamp = number;
 
 export type Regex = string;
 
-export type Declaration = { NestedModule: NestedModule } | { Import: ModuleUri } | { Symbol: Symbol } | { MathStructure: MathStructure } | { Morphism: Morphism } | { Extension: StructureExtension };
+export type Declaration = { NestedModule: NestedModule } | { Import: { uri: ModuleUri; source?: SourceRange } } | { Symbol: Symbol } | { MathStructure: MathStructure } | { Morphism: Morphism } | { Extension: StructureExtension } | { Rule: { id: Id; parameters: Term[]; source?: SourceRange } };
 
 export interface ModuleData {
     uri: ModuleUri;
     meta_module?: ModuleUri | undefined;
     signature?: Language | undefined;
     declarations: Declaration[];
+    source?: SourceRange;
 }
 
 export interface NestedModule {
     uri: SymbolUri;
     declarations: Declaration[];
+    source?: SourceRange;
 }
 
 export type ParagraphOrProblemKind = { type: "Definition" } | { type: "Example" } | ({ type: "Problem" } & CognitiveDimension) | ({ type: "SubProblem" } & CognitiveDimension);
 
-export type SlideElement = { type: "Slide"; html: string; uri: DocumentElementUri } | { type: "Paragraph"; html: string; uri: DocumentElementUri } | { type: "Inputref"; uri: DocumentUri } | { type: "Section"; uri: DocumentElementUri; title: string | undefined; children: SlideElement[] };
+export type SlideElement = { type: "Slide"; html: string; uri: DocumentElementUri } | { type: "Paragraph"; html: string; uri: DocumentElementUri } | { type: "Inputref"; uri: DocumentUri } | { type: "Section"; uri: DocumentElementUri; title?: string | undefined; children?: SlideElement[] };
 
-export type DocumentElement = { UseModule: ModuleUri } | { Module: { range: DocumentRange; module: ModuleUri; children?: DocumentElement[] } } | { MathStructure: { range: DocumentRange; structure: SymbolUri; children?: DocumentElement[] } } | { Extension: { range: DocumentRange; extension: SymbolUri; target: SymbolUri; children?: DocumentElement[] } } | { Morphism: { range: DocumentRange; morphism: SymbolUri; children?: DocumentElement[] } } | { SymbolDeclaration: SymbolUri } | { ImportModule: ModuleUri } | { Section: Section } | { SkipSection: DocumentElement[] } | { Paragraph: LogicalParagraph } | { Problem: Problem } | { Slide: Slide } | { DocumentReference: { uri: DocumentElementUri; target: DocumentUri } } | { Notation: NotationReference } | { VariableDeclaration: VariableDeclaration } | { VariableNotation: VariableNotationReference } | { Definiendum: { range: DocumentRange; uri: SymbolUri } } | { SymbolReference: { range: DocumentRange; uri: SymbolUri; notation?: Id | undefined } } | { VariableReference: { range: DocumentRange; uri: DocumentElementUri; notation?: Id | undefined } } | { Term: DocumentTerm };
+export type DocumentElement = { UseModule: { uri: ModuleUri; source?: SourceRange } } | { Module: { range: DocumentRange; module: ModuleUri; children?: DocumentElement[] } } | { MathStructure: { range: DocumentRange; structure: SymbolUri; children?: DocumentElement[] } } | { Extension: { range: DocumentRange; extension: SymbolUri; target: SymbolUri; children?: DocumentElement[] } } | { Morphism: { range: DocumentRange; morphism: SymbolUri; children?: DocumentElement[] } } | { SymbolDeclaration: SymbolUri } | { ImportModule: ModuleUri } | { Section: Section } | { SkipSection: DocumentElement[] } | { Paragraph: LogicalParagraph } | { Problem: Problem } | { Slide: Slide } | { DocumentReference: { uri: DocumentElementUri; target: DocumentUri; source?: SourceRange } } | { Notation: NotationReference } | { VariableDeclaration: VariableDeclaration } | { VariableNotation: VariableNotationReference } | { Definiendum: { range: DocumentRange; uri: SymbolUri; source?: SourceRange } } | { SymbolReference: { range: DocumentRange; uri: SymbolUri; notation?: Id | undefined; source?: SourceRange } } | { VariableReference: { range: DocumentRange; uri: DocumentElementUri; notation?: Id | undefined; source?: SourceRange } } | { Term: DocumentTerm };
 
 export interface DocumentTerm {
     uri: DocumentElementUri;
-    term: Term;
+    term: TermContainer;
 }
 
 export interface DocumentData {
@@ -237,20 +265,22 @@ export type DocumentKind = "Article" | "Fragment" | { Exam: { date: Timestamp; c
  *    inputref itself; not the referenced Document. For the TOC,
  *    which document is inputrefed is actually irrelevant.
  */
-export type TocElem = { type: "Section"; title: string | undefined; uri: DocumentElementUri; id: string; children: TocElem[] } | { type: "SkippedSection"; children: TocElem[] } | { type: "Inputref"; uri: DocumentUri; title: string | undefined; id: string; children: TocElem[] } | { type: "Paragraph"; styles: Id[]; kind: ParagraphKind } | { type: "Slide" };
+export type TocElem = { type: "Section"; title?: string | undefined; uri: DocumentElementUri; id: string; children?: TocElem[] } | { type: "SkippedSection"; children?: TocElem[] } | { type: "Inputref"; uri: DocumentUri; title?: string | undefined; id: string; children?: TocElem[] } | { type: "Paragraph"; styles?: Id[]; kind: ParagraphKind } | { type: "Slide" };
 
 export interface MathStructure {
     uri: SymbolUri;
     elements: StructureDeclaration[];
     macroname?: Id | undefined;
+    source?: SourceRange;
 }
 
-export type StructureDeclaration = ({ type: "Import" } & ModuleUri) | ({ type: "Symbol" } & Symbol) | ({ type: "Morphism" } & Morphism);
+export type StructureDeclaration = { type: "Import"; uri: ModuleUri; source?: SourceRange } | ({ type: "Symbol" } & Symbol) | ({ type: "Morphism" } & Morphism) | { type: "Rule"; id: Id; parameters: Term[]; source?: SourceRange };
 
 export interface StructureExtension {
     uri: SymbolUri;
     target: SymbolUri;
     elements: StructureDeclaration[];
+    source?: SourceRange;
 }
 
 export interface Symbol {
@@ -261,13 +291,14 @@ export interface Symbol {
 export interface SymbolData {
     arity: ArgumentSpec;
     macroname?: Id | undefined;
-    role: Id[];
-    tp?: Term | undefined;
-    df?: Term | undefined;
+    role?: Id[];
+    tp?: TermContainer;
+    df?: TermContainer;
     return_type?: Term | undefined;
     argument_types?: Term[];
     assoctype?: AssocType | undefined;
-    reordering?: Id | undefined;
+    reordering?: Permutation | undefined;
+    source?: SourceRange;
 }
 
 export type AssocType = "LeftAssociativeBinary" | "RightAssociativeBinary" | "Conjunctive" | "PairwiseConjunctive" | "Prenex";
@@ -279,6 +310,7 @@ export interface Morphism {
     domain: ModuleUri;
     total: boolean;
     elements: Assignment[];
+    source?: SourceRange;
 }
 
 export interface Assignment {
@@ -288,17 +320,19 @@ export interface Assignment {
     refined_type?: Term | undefined;
     new_name?: SimpleUriName | undefined;
     macroname?: Id | undefined;
+    source?: SourceRange;
 }
 
 export interface LogicalParagraph {
     kind: ParagraphKind;
     uri: DocumentElementUri;
     formatting: ParagraphFormatting;
-    title: string | undefined;
     range: DocumentRange;
-    styles: Id[];
-    children: DocumentElement[];
-    fors: [SymbolUri, Term | undefined][];
+    title?: string | undefined;
+    styles?: Id[];
+    children?: DocumentElement[];
+    fors?: [SymbolUri, Term | undefined][];
+    source?: SourceRange;
 }
 
 export type ParagraphFormatting = "Block" | "Inline" | "Collapsed";
@@ -325,6 +359,7 @@ export interface ProblemData {
     styles?: Id[];
     preconditions?: [CognitiveDimension, SymbolUri][];
     objectives?: [CognitiveDimension, SymbolUri][];
+    source?: SourceRange;
 }
 
 export interface GradingNote {
@@ -346,15 +381,17 @@ export type CognitiveDimension = "Remember" | "Understand" | "Apply" | "Analyze"
 export interface Section {
     range: DocumentRange;
     uri: DocumentElementUri;
-    title: string | undefined;
-    children: DocumentElement[];
+    title?: string | undefined;
+    children?: DocumentElement[];
+    source?: SourceRange;
 }
 
 export interface Slide {
     range: DocumentRange;
     uri: DocumentElementUri;
-    title: string | undefined;
-    children: DocumentElement[];
+    title?: string | undefined;
+    children?: DocumentElement[];
+    source?: SourceRange;
 }
 
 export type SectionLevel = { type: "Part" } | { type: "Chapter" } | { type: "Section" } | { type: "Subsection" } | { type: "Subsubsection" } | { type: "Paragraph" } | { type: "Subparagraph" };
@@ -363,12 +400,14 @@ export interface NotationReference {
     symbol: SymbolUri;
     uri: DocumentElementUri;
     notation: DataRef;
+    source?: SourceRange;
 }
 
 export interface VariableNotationReference {
     variable: DocumentElementUri;
     uri: DocumentElementUri;
     notation: DataRef;
+    source?: SourceRange;
 }
 
 export interface Notation {
@@ -396,16 +435,17 @@ export interface VariableDeclaration {
 
 export interface VariableData {
     arity: ArgumentSpec;
-    macroname: Id | undefined;
-    role: Id[];
-    tp: Term | undefined;
-    df: Term | undefined;
-    bind: boolean;
-    assoctype: AssocType | undefined;
-    reordering: Id | undefined;
+    macroname?: Id | undefined;
+    role?: Id[];
+    tp?: TermContainer;
+    df?: TermContainer;
+    bind?: boolean;
+    assoctype?: AssocType | undefined;
+    reordering?: Permutation | undefined;
     argument_types?: Term[];
     return_type?: Term | undefined;
-    is_seq: boolean;
+    is_seq?: boolean;
+    source?: SourceRange;
 }
 
 export interface Quiz {
@@ -677,9 +717,9 @@ export interface InitOutput {
   readonly intounderlyingsink_write: (a: number, b: number) => number;
   readonly intounderlyingsource_cancel: (a: number) => void;
   readonly intounderlyingsource_pull: (a: number, b: number) => number;
-  readonly __wasm_bindgen_func_elem_1806: (a: number, b: number, c: number) => void;
-  readonly __wasm_bindgen_func_elem_1805: (a: number, b: number) => void;
-  readonly __wasm_bindgen_func_elem_1001: (a: number, b: number, c: number, d: number) => void;
+  readonly __wasm_bindgen_func_elem_1810: (a: number, b: number, c: number) => void;
+  readonly __wasm_bindgen_func_elem_1809: (a: number, b: number) => void;
+  readonly __wasm_bindgen_func_elem_1005: (a: number, b: number, c: number, d: number) => void;
   readonly __wbindgen_export: (a: number, b: number) => number;
   readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_export3: (a: number) => void;
