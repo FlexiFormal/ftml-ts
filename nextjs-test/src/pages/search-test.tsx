@@ -16,6 +16,7 @@ export default function SearchTest() {
 
     const docs: DocumentUri[] = [uri];
 
+    console.log("Running search query with these parameters:", { q, uri, num });
     const res = await searchDocs(q, docs, num);
 
     if (res) {
