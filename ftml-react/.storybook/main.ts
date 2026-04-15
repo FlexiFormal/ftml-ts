@@ -1,6 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import wasm from "vite-plugin-wasm";
-import topLevelAwait from "vite-plugin-top-level-await";
+//import topLevelAwait from "vite-plugin-top-level-await";
 import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
@@ -17,7 +17,7 @@ const config: StorybookConfig = {
     viteFinal: async (config) => {
         // Merge custom configuration with Storybook's default
         return mergeConfig(config, {
-            plugins: [wasm(), topLevelAwait()],
+            plugins: [wasm()]//, topLevelAwait()],
         });
     },
 };
