@@ -1,8 +1,8 @@
 use crate::{Views, inject_css};
 use ftml_components::{SidebarPosition, config::FtmlConfig, utils::LocalCacheExt};
-use ftml_dom::FtmlViews;
+use ftml_dom::{FtmlViews, toc::TocSource};
 use ftml_uris::{DocumentElementUri, DocumentUri};
-use leptos::prelude::IntoAny;
+use leptos::prelude::{IntoAny, use_context};
 use leptos_react::{
     context::LeptosContext,
     functions::{FromJs, JsFunction2},
@@ -89,22 +89,20 @@ pub fn render_document(
                     Some(html),
                 ),
             };
+            let ts : TocSource = use_context().unwrap_or(TocSource::None);
             match html {
                 None => {
                     let uricl = uri.clone();
                     leptos::either::Either::Left(
-                        ftml_dom::utils::local_cache::LocalCache::with_or_toast::<
-                            ftml_viewer::backend::GlobalBackend,
-                            _,
-                            _,
-                        >(
-                            move |c| c.get_document_html(uricl, None),
+                        ftml_dom::utils::local_cache::LocalCache::with_or_toast(
+                            move |c| c.get_document_html(ftml_components::backend(),uricl, None),
                             |(html, css, stripped)| {
                                 inject_css(css.into_vec());
-                                Views::setup_document::<ftml_viewer::backend::GlobalBackend>(
+                                Views::setup_document(
                                     uri,
                                     SidebarPosition::Next,
                                     stripped,
+                                    ts,
                                     move || Views::render_ftml(html.into_string(), None).into_any(),
                                 )
                             },
@@ -112,10 +110,11 @@ pub fn render_document(
                         ),
                     )
                 }
-                Some(s) => leptos::either::Either::Right(Views::setup_document::<ftml_viewer::backend::GlobalBackend>(
+                Some(s) => leptos::either::Either::Right(Views::setup_document(
                     uri,
                     SidebarPosition::Next,
                     true,
+                    ts,
                     move || Views::render_ftml(s.into_string(), None).into_any(),
                 )),
             }
@@ -141,18 +140,15 @@ pub fn render_fragment(
             FragmentOptions::FromBackend { uri } => {
                 let uricl = uri.clone();
                 leptos::either::Either::Left(
-                    ftml_dom::utils::local_cache::LocalCache::with_or_toast::<
-                        ftml_viewer::backend::GlobalBackend,
-                        _,
-                        _,
-                    >(
-                        move |c| c.get_fragment(uricl.into(), None),
+                    ftml_dom::utils::local_cache::LocalCache::with_or_toast(
+                        move |c| c.get_fragment(ftml_components::backend(),uricl.into(), None),
                         |(html, css, stripped)| {
                             inject_css(css.into_vec());
-                            Views::render_fragment::<ftml_viewer::backend::GlobalBackend>(
+                            Views::render_fragment(
                                 Some(uri.into()),
                                 SidebarPosition::None,
                                 stripped,
+                                TocSource::None,
                                 move || Views::render_ftml(html.into_string(), None).into_any(),
                             )
                         },
@@ -161,10 +157,11 @@ pub fn render_fragment(
                 )
             }
             FragmentOptions::HtmlString { html, uri } => {
-                leptos::either::Either::Right(Views::render_fragment::<ftml_viewer::backend::GlobalBackend>(
+                leptos::either::Either::Right(Views::render_fragment(
                     uri.map(Into::into),
                     SidebarPosition::None,
                     true,
+                    TocSource::None,
                     move || Views::render_ftml(html.into_string(), None).into_any(),
                 ))
             }

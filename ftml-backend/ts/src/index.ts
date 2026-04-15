@@ -155,7 +155,7 @@ export async function archiveDependencies(
  */
 export async function contentToc(
     uri: DocumentUriParams,
-): Promise<[Base.Css[], Base.TocElem[]] | undefined> {
+): Promise<[Base.Css[], Base.SectionLevel,Base.TocElem[]] | undefined> {
     return await rawGetRequest("content/toc", uri);
 }
 
