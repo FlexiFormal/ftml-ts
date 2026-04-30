@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@flexiformal/ftml": "^0.0.27",
-    "@flexiformal/ftml-backend": "^0.0.9",
-    "@flexiformal/ftml-react": "^0.0.27",
+    "@flexiformal/ftml": "^0.0.28",
+    "@flexiformal/ftml-backend": "^0.0.11",
+    "@flexiformal/ftml-react": "^0.0.28",
     "next": "^15.5.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
