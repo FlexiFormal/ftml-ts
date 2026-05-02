@@ -242,6 +242,16 @@ export async function solution(
     }
 }
 
+/**
+ * Get the grading notes for the problem with the given URI.
+ */
+export async function gradingNotes(
+    uri: DocumentElementUriParams,
+): Promise<Base.GradingNote[] | undefined> {
+    return await rawGetRequest("content/gnotes", uri);
+}
+
+
 export async function title(
     uri: URIParams,
 ): Promise<[Base.Css[], string] | undefined> {

@@ -457,7 +457,7 @@ export interface VariableNotationReference {
     source?: SourceRange;
 }
 
-export type AnswerKind = ({ type: "Class" } & number) | ({ type: "Trait" } & number);
+export type AnswerKind = { type: "Class"; value: number } | { type: "Trait"; value: number };
 
 export type AnyOpaque = { Term: number } | { Node: OpaqueNode } | { Text: string };
 
@@ -521,9 +521,9 @@ export type ModuleUri = string;
 
 export type NarrativeUri = string;
 
-export type NodeOrText = NotationNode | string;
+export type NodeOrText = { type: "Node"; value: NotationNode } | { type: "Text"; value: string };
 
-export type NotationComponent = { type: "Node"; tag: Id; attributes?: [Id, string][]; children?: NotationComponent[] } | { type: "Argument"; index: number; mode: ArgumentMode } | { type: "ArgSep"; index: number; mode: ArgumentMode; sep?: NotationComponent[] } | { type: "ArgMap"; index: number; segments?: NotationComponent[] } | ({ type: "MainComp" } & NotationNode) | ({ type: "Comp" } & NotationNode) | ({ type: "Text" } & string);
+export type NotationComponent = { type: "Node"; tag: Id; attributes?: [Id, string][]; children?: NotationComponent[] } | { type: "Argument"; index: number; mode: ArgumentMode } | { type: "ArgSep"; index: number; mode: ArgumentMode; sep?: NotationComponent[] } | { type: "ArgMap"; index: number; segments?: NotationComponent[] } | { type: "MainComp"; node: NotationNode } | { type: "Comp"; node: NotationNode } | { type: "Text"; txt: string };
 
 export type Numeric = { Int: number } | { Float: Float64 };
 

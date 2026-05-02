@@ -446,7 +446,7 @@ export interface VariableNotationReference {
     source?: SourceRange;
 }
 
-export type AnswerKind = ({ type: "Class" } & number) | ({ type: "Trait" } & number);
+export type AnswerKind = { type: "Class"; value: number } | { type: "Trait"; value: number };
 
 export type AnyOpaque = { Term: number } | { Node: OpaqueNode } | { Text: string };
 
@@ -512,9 +512,9 @@ export type ModuleUri = string;
 
 export type NarrativeUri = string;
 
-export type NodeOrText = NotationNode | string;
+export type NodeOrText = { type: "Node"; value: NotationNode } | { type: "Text"; value: string };
 
-export type NotationComponent = { type: "Node"; tag: Id; attributes?: [Id, string][]; children?: NotationComponent[] } | { type: "Argument"; index: number; mode: ArgumentMode } | { type: "ArgSep"; index: number; mode: ArgumentMode; sep?: NotationComponent[] } | { type: "ArgMap"; index: number; segments?: NotationComponent[] } | ({ type: "MainComp" } & NotationNode) | ({ type: "Comp" } & NotationNode) | ({ type: "Text" } & string);
+export type NotationComponent = { type: "Node"; tag: Id; attributes?: [Id, string][]; children?: NotationComponent[] } | { type: "Argument"; index: number; mode: ArgumentMode } | { type: "ArgSep"; index: number; mode: ArgumentMode; sep?: NotationComponent[] } | { type: "ArgMap"; index: number; segments?: NotationComponent[] } | { type: "MainComp"; node: NotationNode } | { type: "Comp"; node: NotationNode } | { type: "Text"; txt: string };
 
 export type Numeric = { Int: number } | { Float: Float64 };
 
@@ -806,14 +806,14 @@ export interface InitOutput {
     readonly solutions_to_jstring: (a: number, b: number) => void;
     readonly solutions_to_solutions: (a: number, b: number) => void;
     readonly rdf_encode: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_34695: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_34697: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_20337: (a: number, b: number, c: number) => number;
-    readonly __wasm_bindgen_func_elem_28802: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_10399: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_28802_3: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_25230: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_28801: (a: number, b: number) => void;
+    readonly __wasm_bindgen_func_elem_34964: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_34966: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_20526: (a: number, b: number, c: number) => number;
+    readonly __wasm_bindgen_func_elem_28961: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_10440: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_28961_3: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_25379: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_28960: (a: number, b: number) => void;
     readonly __wbindgen_export: (a: number, b: number) => number;
     readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
     readonly __wbindgen_export3: (a: number) => void;

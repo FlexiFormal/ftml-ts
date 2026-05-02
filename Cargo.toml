@@ -67,3 +67,7 @@ console_error_panic_hook = "0.1"
 tracing-wasm = { version = "0.2" }
 tsify = { version = "0.5", features = ["js"] }
 serde = { version = "1" }
+
+
+[replace]
+"serde-lite:0.5.1" = { git = 'https://github.com/Jazzpirate/serde-lite',branch="hashmaps" }

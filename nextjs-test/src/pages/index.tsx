@@ -51,6 +51,7 @@ export default function Home() {
               type: "FromBackend",
               uri: "https://mathhub.info?a=courses/FAU/AI/course&p=course/sec&d=concept&l=en&e=section/paragraph",
             }}
+            allowNotationChanges={true}
           />
           <p>[Fragment above]</p>
         </main>
