@@ -24,6 +24,8 @@ export {
     SolutionData,
     ProblemResponse,
     ProblemFeedbackJson,
+    DocumentData,
+    ModuleData
 } from "./ftml/ftml";
 
 declare global {
@@ -268,6 +270,14 @@ export async function contentFragment(
     uri: URIParams,
 ): Promise<[Base.Css[], string] | undefined> {
     return await rawGetRequest("content/fragment", uri);
+}
+
+export async function getDocument(uri:DocumentUriParams): Promise<Base.DocumentData | undefined> {
+    return await rawGetRequest("domain/document", uri);
+}
+
+export async function getModule(uri:DocumentUriParams): Promise<Base.ModuleData | undefined> {
+    return await rawGetRequest("domain/module", uri);
 }
 
 async function rawGetRequest<

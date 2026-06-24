@@ -6,7 +6,7 @@
  * *This API requires the following crate features to be activated: `ReadableStreamType`*
  */
 
-type ReadableStreamType = "bytes";
+export type ReadableStreamType = "bytes";
 
 export interface FtmlConfig {
     allowHovers?:boolean;
@@ -806,14 +806,16 @@ export interface InitOutput {
     readonly solutions_to_jstring: (a: number, b: number) => void;
     readonly solutions_to_solutions: (a: number, b: number) => void;
     readonly rdf_encode: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_34964: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_34966: (a: number, b: number, c: number, d: number) => void;
-    readonly __wasm_bindgen_func_elem_20526: (a: number, b: number, c: number) => number;
-    readonly __wasm_bindgen_func_elem_28961: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_10440: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_28961_3: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_25379: (a: number, b: number, c: number) => void;
-    readonly __wasm_bindgen_func_elem_28960: (a: number, b: number) => void;
+    readonly __wasm_bindgen_func_elem_34825: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_34827: (a: number, b: number, c: number, d: number) => void;
+    readonly __wasm_bindgen_func_elem_24495: (a: number, b: number, c: number) => number;
+    readonly __wasm_bindgen_func_elem_28790: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_10473: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_28511: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_28790_4: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_19902: (a: number, b: number, c: number) => void;
+    readonly __wasm_bindgen_func_elem_28510: (a: number, b: number) => void;
+    readonly __wasm_bindgen_func_elem_28789: (a: number, b: number) => void;
     readonly __wbindgen_export: (a: number, b: number) => number;
     readonly __wbindgen_export2: (a: number, b: number, c: number, d: number) => number;
     readonly __wbindgen_export3: (a: number) => void;
