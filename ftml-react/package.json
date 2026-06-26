@@ -1,6 +1,6 @@
 {
   "name": "@flexiformal/ftml-react",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "",
   "homepage": "https://github.com/FlexiFormal/ftml-ts#readme",
   "bugs": {
@@ -32,25 +32,25 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-docs": "^10.3.5",
-    "@storybook/addon-onboarding": "^10.3.5",
-    "@storybook/react-vite": "^10.3.5",
-    "@chromatic-com/storybook": "^5.1.1",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/browser": "^4.1.3",
-    "@vitest/coverage-v8": "^4.1.3",
-    "eslint-plugin-storybook": "10.3.5",
-    "storybook": "^10.2.8",
-    "tsup": "^8.4.0",
-    "typescript": "^5.0.0",
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/addon-onboarding": "^10.4.6",
+    "@storybook/react-vite": "^10.4.6",
+    "@chromatic-com/storybook": "^5.2.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/browser": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.9",
+    "eslint-plugin-storybook": "10.4.6",
+    "storybook": "^10.4.6",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
     "vite-plugin-wasm": "^3.6.0",
-    "vitest": "^4.1.3"
+    "vitest": "^4.1.9"
   },
   "dependencies": {
-    "@flexiformal/ftml": "^0.0.32",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@flexiformal/ftml": "=0.0.34",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }
